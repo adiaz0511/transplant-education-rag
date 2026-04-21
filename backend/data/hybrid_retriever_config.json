@@ -1,0 +1,28 @@
+{
+  "selected_retrievers": [
+    "bm25",
+    "specter",
+    "medcpt"
+  ],
+  "top_k_per_retriever": 3,
+  "max_context_chunks": 6,
+  "rrf_k": 60,
+  "dense_retrievers": {
+    "specter": {
+      "model_name": "allenai/specter",
+      "index_file": "specter_faiss.index",
+      "pooling": "cls"
+    },
+    "medcpt": {
+      "query_model_name": "ncbi/MedCPT-Query-Encoder",
+      "article_model_name": "ncbi/MedCPT-Article-Encoder",
+      "index_file": "medcpt_faiss.index",
+      "pooling": "cls"
+    }
+  },
+  "lexical_retrievers": {
+    "bm25": {
+      "index_file": "bm25_index.json"
+    }
+  }
+}

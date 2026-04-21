@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: rag-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.11"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG_LOGS
+        value: "false"
+      - key: PRODUCTION_DOCS_ENABLED
+        value: "false"
+      - key: SIGNATURE_MAX_AGE_SECONDS
+        value: "300"
+      - key: NONCE_TTL_SECONDS
+        value: "300"
+      - key: RATE_LIMIT_WINDOW_SECONDS
+        value: "60"
+      - key: RATE_LIMIT_MAX_REQUESTS_PER_IP
+        value: "30"
+      - key: RATE_LIMIT_MAX_REQUESTS_PER_APP
+        value: "120"
+      - key: GROQ_TIMEOUT_SECONDS
+        value: "20"
+      - key: MAX_INSTRUCTIONS_CHARS
+        value: "2000"
+      - key: GROQ_PRIMARY_MODEL
+        value: groq/compound
+      - key: GROQ_FALLBACK_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GROQ_QA_PRIMARY_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GROQ_API_KEY
+        sync: false
+      - key: APP_SHARED_SECRET
+        sync: false
+      - key: APP_ID
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false

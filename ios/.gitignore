@@ -1,0 +1,10 @@
+# Local secrets
+/TransplantGuide/Config/BackendSecrets.local.xcconfig
+
+# macOS
+.DS_Store
+
+# Xcode user state
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint

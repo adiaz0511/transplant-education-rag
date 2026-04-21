@@ -1,0 +1,5 @@
+BACKEND_BASE_URL = "http://127.0.0.1:8000"
+BACKEND_APP_ID =
+BACKEND_SHARED_SECRET =
+
+#include? "BackendSecrets.local.xcconfig"
