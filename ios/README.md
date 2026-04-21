@@ -40,7 +40,3 @@ The local secrets file is ignored by Git.
 4. Run the app on an iOS simulator.
 
 The backend URL and shared secret must match the backend `.env` file.
-
-## Included Manual
-
-The English heart transplant teaching manual is included in this folder for reference. The app itself uses backend-generated content and does not parse the PDF at runtime.
