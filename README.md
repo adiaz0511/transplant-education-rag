@@ -25,6 +25,8 @@ Then run the setup script:
 
 The setup script asks for a Groq API key. It then generates a shared app secret, creates the backend `.env` file, creates the iOS local secrets file, and installs backend dependencies if needed.
 
+The setup script also offers to download the local MedCPT model files. This download is about 418 MB. Downloading the model during setup avoids a long pause during the first backend run or first request.
+
 After setup, start the backend:
 
 ```bash
@@ -38,6 +40,8 @@ In a second terminal window, open the iOS project:
 ```
 
 Finally, run the `TransplantGuide` scheme in Xcode on an iOS simulator.
+
+If setup is rerun, rebuild the iOS app in Xcode before testing again. The setup script generates a new shared secret, and the app build must include the updated local config.
 
 ## Source Manual
 
@@ -57,8 +61,39 @@ Each folder has its own README with more specific instructions:
 
 ## Local Configuration
 
-The backend and iOS app use local configuration files for secrets. Example configuration files are included where appropriate, but real secrets are not included in this repository.
+The backend and iOS app use local configuration files for secrets. Real secrets are not committed to this repository.
 
-For local testing, the backend requires a Groq API key and an app shared secret. The iOS app must use the same backend URL, app ID, and shared secret as the backend.
+1. Run the setup script from the repository root:
 
-The recommended setup path is `./setup_project.sh`, which creates both local configuration files with matching values.
+```bash
+./setup_project.sh
+```
+
+2. Enter a valid Groq API key when prompted.
+
+3. Accept the optional MedCPT model download if you want to avoid a model download during the first backend run.
+
+4. Start the backend:
+
+```bash
+./run_backend.sh
+```
+
+5. Open the iOS project in a second terminal window:
+
+```bash
+./open_ios.sh
+```
+
+6. Run the `TransplantGuide` scheme in Xcode on an iOS simulator.
+
+The setup script creates these local files:
+
+- `backend/.env`
+- `ios/TransplantGuide/Config/BackendSecrets.local.xcconfig`
+
+The backend and iOS app must use the same app ID and shared secret. The setup script generates both files together so the values match.
+
+If setup is rerun, rebuild the iOS app in Xcode before testing again. The setup script generates a new shared secret, and the app build must include the updated local config.
+
+The MedCPT model files are not committed to Git because the model weight file is larger than GitHub's normal file size limit. For local testing, run `./download_models.sh` or accept the optional model download during `./setup_project.sh`.

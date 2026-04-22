@@ -47,4 +47,5 @@ else
 fi
 export PRELOAD_MEDCPT_ON_STARTUP=true
 export STRICT_HYBRID_RETRIEVAL=true
+export KMP_DUPLICATE_LIB_OK=true
 exec "$VENV_PYTHON" -m uvicorn app.main:app

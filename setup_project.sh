@@ -35,17 +35,14 @@ if [[ -f "$BACKEND_ENV_FILE" || -f "$IOS_SECRETS_FILE" ]]; then
   echo
 fi
 
-read -r -p "Backend URL [$DEFAULT_BACKEND_URL]: " BACKEND_URL
-BACKEND_URL="${BACKEND_URL:-$DEFAULT_BACKEND_URL}"
+BACKEND_URL="$DEFAULT_BACKEND_URL"
+APP_ID="$DEFAULT_APP_ID"
 
-read -r -p "App ID [$DEFAULT_APP_ID]: " APP_ID
-APP_ID="${APP_ID:-$DEFAULT_APP_ID}"
+echo "Using backend URL: $BACKEND_URL"
+echo "Using app ID: $APP_ID"
+echo
 
-printf "Groq API key: "
-stty -echo
-read -r GROQ_API_KEY
-stty echo
-printf "\n"
+read -r -p "Groq API key: " GROQ_API_KEY
 
 if [[ -z "$GROQ_API_KEY" ]]; then
   echo "GROQ_API_KEY is required."
@@ -106,8 +103,28 @@ else
 fi
 
 echo
+if [[ ! -f "$BACKEND_DIR/local_models/MedCPT-Query-Encoder/model.safetensors" ]]; then
+  echo "The MedCPT local model file was not found."
+  echo "The first backend run can download it automatically, but that may look like a long pause."
+  echo "Expected download size: about 418 MB."
+  echo
+  read -r -p "Download the local MedCPT model now? [y/N]: " DOWNLOAD_MODEL
+  case "$DOWNLOAD_MODEL" in
+    y|Y|yes|YES)
+      "$ROOT_DIR/download_models.sh"
+      ;;
+    *)
+      echo "Skipping model download. The backend may download it on first startup or first request."
+      ;;
+  esac
+fi
+
+echo
 echo "Setup complete."
 echo
 echo "Next steps:"
 echo "  ./run_backend.sh"
 echo "  ./open_ios.sh"
+echo
+echo "If the iOS app was already installed or running, rebuild it in Xcode after setup."
+echo "The setup script generates a new shared secret, and the app must be rebuilt to use it."
