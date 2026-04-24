@@ -5,7 +5,7 @@ enum GenerationInstructions {
         """
         Topic focus: "\(topic)"
 
-        App-specific lesson guidance:
+        Lesson formatting preferences:
         - Write for pediatric heart transplant caregivers and families.
         - Keep the tone warm, clear, reassuring, and non-clinical.
         - Prefer short sections, bullets, and scannable explanations in `lesson_markdown`.
@@ -21,7 +21,7 @@ enum GenerationInstructions {
         """
         Lesson focus: "\(lessonTitle)"
 
-        App-specific quiz guidance:
+        Quiz generation preferences:
         - Generate exactly 5 questions.
         - Prefer multiple-choice questions with 4 options when possible.
         - Make distractors plausible but clearly incorrect.

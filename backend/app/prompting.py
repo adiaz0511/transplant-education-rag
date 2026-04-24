@@ -80,7 +80,7 @@ QUIZ STYLE:
         if len(instructions) > MAX_INSTRUCTIONS_CHARS:
             instructions = instructions[:MAX_INSTRUCTIONS_CHARS].rstrip()
         instructions_block = f"""
-Formatting instructions:
+Additional formatting preferences:
 {instructions}
 """.strip()
 
@@ -116,7 +116,7 @@ RULES:
 - The JSON must be valid and complete
 - The JSON section must NOT be wrapped in backticks or code blocks
 - Do NOT include anything after the JSON
-- If any rule is violated, regenerate internally before responding
+- Return JSON that satisfies all of these rules
 
 MARKDOWN COMPATIBILITY RULES (applies ONLY to markdown fields):
 
